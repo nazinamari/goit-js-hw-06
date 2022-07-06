@@ -80,3 +80,4 @@ function destroyBoxes() {
 
 boxes.style.display = "flex";
 boxes.style.listStyle = "none";
+boxes.style.flexWrap = "wrap"
