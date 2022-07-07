@@ -30,9 +30,12 @@ form.addEventListener('submit', handleSubmit);
 function handleSubmit(event) {
     event.preventDefault();
     const formElements = event.currentTarget.elements;
-
     const mail = formElements.email.value;
-    const pass = formElements.password.value;
+    const password = formElements.password.value;
+
+    if (mail == "" || password == "") {
+        alert ("Все поля должны быть заполнены")
+    }
 
     const formData = {
         mail,

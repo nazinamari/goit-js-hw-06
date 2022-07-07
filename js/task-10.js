@@ -34,9 +34,9 @@ function getRandomHexColor() {
 //* Посилання на елементи
 
 const refs = {
-  inputRef: document.querySelector('input'),
-  btnCreateRef: document.querySelector('button[data-create]'),
-  btnDestroyRef: document.querySelector('button[data-destroy]'),
+  inputRef: document.querySelector('#controls > input'),
+  btnCreateRef: document.querySelector('#controls button[data-create]'),
+  btnDestroyRef: document.querySelector('#controls button[data-destroy]'),
   divRef: document.querySelector('#boxes'),
 };
 
@@ -44,35 +44,49 @@ const refs = {
 
 refs.inputRef.addEventListener('click', onInput);
 refs.btnCreateRef.addEventListener('click', () => createBoxes(amount));
-refs.btnDestroyRef.addEventListener('click', destroyBoxes);
+refs.btnDestroyRef.addEventListener('click', deleteBoxes);
 
 let amount = 0;
 
-function onInput(event) {
-  amount = Number(event.currentTarget.value);
+// function onInput(event) {
+//   amount = Number(event.currentTarget.value);
+// }
+
+function onInput() {
+  if(refs.inputRef.value <= 100){
+      const valueInput = refs.inputRef.value
+      createBoxes(valueInput)
+  } else {
+    alert('Не більше 100 елементів')
+    }
 }
 
+let size = {
+  width: 30,
+  height: 30,
+}
 // Создай функцию createBoxes(amount), которая принимает один параметр - число. 
 // Функция создает столько < div >, сколько указано в amount и добавляет их в div#boxes.
 
 //* Функція створення розмітки
 
 function createBoxes(amount) {
-  let emptyBox = [];
-  for (let i = 1; i <= amount; i += 1){
-    const newDivEl = document.createElement('div');
-    newDivEl.style.height = `${i * 10 + 30}px`;
-    newDivEl.style.width = `${i * 10 + 30}px`;
-    newDivEl.style.background = `${getRandomHexColor()}`;
-    emptyBox.push(newDivEl);
+  for (let i = 1; amount >= i; i++){
+    let newDivEl = document.createElement('div')
+    newDivEl.setAttribute('id', 'boxes')
+    newDivEl.style.width = size.width + 'px';
+    newDivEl.style.height = size.height + 'px';
+    newDivEl.style.backgroundColor = getRandomHexColor()
+    refs.divRef.append(newDivEl)
+    size.width += 10;
+    size.height += 10;
   }
-  refs.divRef.append(...emptyBox);
 }
 
 // Создай функцию destroyBoxes(), которая очищает содержимое div#boxes, 
 // тем самым удаляя все созданные элементы.
 
-function destroyBoxes() {
+function deleteBoxes() {
   refs.divRef.innerHTML = "";
   refs.inputRef.value = 0;
   amount = 0;
@@ -81,3 +95,5 @@ function destroyBoxes() {
 boxes.style.display = "flex";
 boxes.style.listStyle = "none";
 boxes.style.flexWrap = "wrap"
+
+
