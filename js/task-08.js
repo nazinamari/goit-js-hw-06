@@ -39,7 +39,7 @@ function handleSubmit(event) {
 
     const formData = {
         mail,
-        pass,
+        password ,
     };
 
     console.log(formData);
