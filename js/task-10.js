@@ -34,61 +34,41 @@ function getRandomHexColor() {
 //* Посилання на елементи
 
 const refs = {
-  inputRef: document.querySelector('#controls > input'),
-  btnCreateRef: document.querySelector('#controls button[data-create]'),
-  btnDestroyRef: document.querySelector('#controls button[data-destroy]'),
-  divRef: document.querySelector('#boxes'),
+  input: document.querySelector('#controls input'),
+  btnCreate: document.querySelector('#controls button[data-create]'),
+  btnDestroy: document.querySelector('#controls button[data-destroy]'),
+  container: document.querySelector('#boxes'),
 };
 
-//* Слухачі подій
-
-refs.inputRef.addEventListener('click', onInput);
-refs.btnCreateRef.addEventListener('click', () => createBoxes(amount));
-refs.btnDestroyRef.addEventListener('click', deleteBoxes);
-
-let amount = 0;
-
-// function onInput(event) {
-//   amount = Number(event.currentTarget.value);
-// }
-
-function onInput() {
-  if(refs.inputRef.value <= 100){
-      const valueInput = refs.inputRef.value
-      createBoxes(valueInput)
-  } else {
-    alert('Не більше 100 елементів')
-    }
-}
-
-let size = {
-  width: 30,
-  height: 30,
-}
 // Создай функцию createBoxes(amount), которая принимает один параметр - число. 
 // Функция создает столько < div >, сколько указано в amount и добавляет их в div#boxes.
 
-//* Функція створення розмітки
+const createBoxes = () => {
+  refs.container.textContent = "";
+  const count = Number(refs.input.value);
+  const items = [];
+  for (let i = 0; i < count; i += 1) {
+    const div = document.createElement('div');
+    div.style.background = getRandomHexColor();
+    div.style.width = i * 10 + 20 + "px";
+    div.style.height = i * 10 + 20 + "px";
 
-function createBoxes(amount) {
-  for (let i = 1; amount >= i; i++){
-    let newDivEl = document.createElement('div')
-    newDivEl.setAttribute('id', 'boxes')
-    newDivEl.style.width = size.width + 'px';
-    newDivEl.style.height = size.height + 'px';
-    newDivEl.style.backgroundColor = getRandomHexColor()
-    refs.divRef.append(newDivEl)
-    size.width += 10;
-    size.height += 10;
+    items.push(div);
   }
+
+  refs.container.append(...items);
 }
+
+
+refs.btnCreate.addEventListener('click', createBoxes);
+refs.btnDestroy.addEventListener('click', deleteBoxes);
 
 // Создай функцию destroyBoxes(), которая очищает содержимое div#boxes, 
 // тем самым удаляя все созданные элементы.
 
 function deleteBoxes() {
-  refs.divRef.innerHTML = "";
-  refs.inputRef.value = 0;
+  refs.container.textContent = '';
+  refs.inputRef.value = '';
   amount = 0;
 }
 
