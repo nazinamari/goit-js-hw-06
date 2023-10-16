@@ -1,6 +1,5 @@
 // const categoriesListItems = document.querySelectorAll('li.item');
 const categoriesListItems = Array.from(document.querySelectorAll('li.item'));
-// console.log(categoriesListItems);
 
 const countCategories = categoriesListItems.length;
 

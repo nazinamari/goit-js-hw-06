@@ -19,11 +19,6 @@ const galleryListItems = images.map(({ url, alt }) =>
   `<li class="gallery__item"><img class="gallery__item-img" srcset=${url} alt='${alt}' width="300"/></li>`)
   .join("");
 
-// galleryList.style.display = "flex";
-// galleryList.style.justifyContent = "space-around";
-// galleryList.style.listStyle = "none";
-// galleryList.style.gap = "5px";
-
 	galleryList.style.cssText = `
   display: flex;
   justify-content: space-around;
@@ -32,3 +27,10 @@ const galleryListItems = images.map(({ url, alt }) =>
 `;
 
 galleryList.insertAdjacentHTML("beforeend", galleryListItems);
+
+
+
+// galleryList.style.display = "flex";
+// galleryList.style.justifyContent = "space-around";
+// galleryList.style.listStyle = "none";
+// galleryList.style.gap = "5px";

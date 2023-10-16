@@ -1,31 +1,23 @@
-// function getRandomHexColor() {
-//   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-// }
+const refs = {
+  bodyRef: document.querySelector('body'),
+  btnEl: document.querySelector('.change-color'),
+  hexText: document.querySelector('.color')
+} 
 
-// todo Напиши скрипт, который изменяет цвета фона элемента < body >
-//   через инлайн стиль при клике на button.change -
-//   color и выводит значение цвета в span.color.
+refs.btnEl.addEventListener('click', onHexColor);
 
-// <div class="widget">
-//   <p>Background color: <span class="color">-</span></p>
-//   <button type="button" class="change-color">Change color</button>
-// </div>
-
-// Для генерации случайного цвета используй функцию getRandomHexColor.
-
-const bodyRef = document.querySelector('body');
-
-const btnEl = document.querySelector('.change-color');
-
-const hexText = document.querySelector('.color');
-
-btnEl.addEventListener("click", onhexColor);
-
-function onhexColor() {
+function onHexColor () {
   const hexColor = getRandomHexColor();
-  bodyRef.style.backgroundColor = hexColor;
-  hexText.textContent = hexColor;
-  console.log(hexColor);
+  updateBackgroundColor(hexColor);
+  updateHexText(hexColor);
+}
+
+function updateBackgroundColor(color) {
+  refs.bodyRef.style.background = color;
+}
+
+function updateHexText(color) {
+  refs.hexText.textContent = color;
 }
 
 function getRandomHexColor() {

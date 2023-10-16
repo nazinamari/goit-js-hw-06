@@ -1,19 +1,9 @@
-// todo  Напиши скрипт, который реагирует на изменение значения 
+const inputEl = document.querySelector('#font-size-control');
+const inputSpanEl = document.querySelector('#text');
 
-// input#font - size - control(событие input) и изменяет инлайн - 
-// стиль span#text обновляя свойство font - size.
-// В результате при перетаскивании ползунка будет меняться размер текста.
+const onInputChange = evt => {
+    const fontSize = evt.currentTarget.value + 'px';
+    inputSpanEl.style.fontSize = fontSize;
+};
 
-// <input id="font-size-control" type="range" min="16" max="96" />
-// <br />
-// <span id="text">Abracadabra!</span>
-
-const inputText = document.querySelector('#text');
-console.log(inputText);
-
-const inputElRange = document.querySelector('#font-size-control');
-console.log(inputElRange);
-
-inputElRange.addEventListener('input', (event) => {
-    inputText.style.fontSize = event.currentTarget.value + 'px';
-});
+inputEl.addEventListener('input', onInputChange);
